@@ -31,3 +31,35 @@ class Node[T]:
             AttributeError: This attribute is immutable.
         """
         raise AttributeError("Immutable attribute.")
+
+
+@dataclass
+class SingleLinkedNode[T](Node[T]):
+    """
+    Represents a single linked node in a linked list.
+
+    Attributes:
+        _next (Node[T] | None): The reference to the next node in the linked list.
+    """
+
+    _next: Node[T] | None = None
+
+    @property
+    def next(self) -> Node[T] | None:
+        """
+        Get the reference to the next node in the linked list.
+
+        Returns:
+            Node[T] | None: The reference to the next node, or None if there is no next node.
+        """
+        return self._next
+
+    @next.setter
+    def next(self, next: Node[T] | None) -> None:
+        """
+        Setter for the next attribute.
+
+        Args:
+            next (Node[T] | None): The reference to the next node, or None if there is no next node.
+        """
+        self._next = next
