@@ -9,3 +9,7 @@ format:
 .PHONY: tests
 test:
 	@poetry run pytest --cov=src --verbose tests
+
+.PHONY: repl
+repl:
+	@poetry run ipython
