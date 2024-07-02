@@ -8,4 +8,4 @@ format:
 
 .PHONY: tests
 test:
-	@poetry run pytest --verbose tests
+	@poetry run pytest --cov=src --verbose tests
