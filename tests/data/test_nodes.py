@@ -4,6 +4,9 @@ from src.data.nodes import Node
 
 
 class TestNode:
+    """
+    A test class for the Node class.
+    """
 
     @pytest.mark.parametrize("data", [1, 2, 3, "4", "five", (6, 7), [8, 9]])
     def test_data_read(self, data):
