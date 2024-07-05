@@ -28,6 +28,19 @@ class TestSingleLinkedNode:
     """
 
     @pytest.mark.parametrize("data", [1, 2, 3, "4", "five", (6, 7), [8, 9]])
+    def test_data_read(self, data):
+        assert SingleLinkedNode[type(data)](data).data == data
+
+    @pytest.mark.parametrize("data", [1, 2, 3, "4", "five", (6, 7), [8, 9]])
+    def test_data_write(self, data):
+        node = SingleLinkedNode[str]("data")
+
+        with pytest.raises(AttributeError):
+            node.data = data
+
+        assert node.data == "data"
+
+    @pytest.mark.parametrize("data", [1, 2, 3, "4", "five", (6, 7), [8, 9]])
     def test_next_read(self, data):
         a_node = SingleLinkedNode[type(data)](data)
         assert a_node.next is None
