@@ -63,3 +63,35 @@ class SingleLinkedNode[T](Node[T]):
             next (Node[T] | None): The reference to the next node, or None if there is no next node.
         """
         self._next = next
+
+
+@dataclass
+class DoubleLinkedNode[T](SingleLinkedNode[T]):
+    """
+    Represents a double linked node in a linked list.
+
+    Attributes:
+        _previous (Node[T] | None): The reference to the previous node in the linked list.
+    """
+
+    _previous: Node[T] | None = None
+
+    @property
+    def previous(self) -> Node[T] | None:
+        """
+        Get the reference to the previous node in the linked list.
+
+        Returns:
+            Node[T] | None: The reference to the previous node, or None if there is no previous node.
+        """
+        return self._previous
+
+    @previous.setter
+    def previous(self, previous: Node[T] | None) -> None:
+        """
+        Setter for the previous attribute.
+
+        Args:
+            previous (Node[T] | None): The reference to the previous node, or None if there is no previous node.
+        """
+        self._previous = previous
