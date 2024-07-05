@@ -27,5 +27,27 @@ class LinkedList[T]:
     def head(self, head: SingleLinkedNode[T] | None) -> None:
         """
         Setter for the head attribute.
+
+        Parameters:
+        - head: The new head node of the linked list.
+
+        Returns:
+        - None
+
+        Raises:
+        - AttributeError: If the head attribute is immutable.
         """
-        self._head = head
+        raise AttributeError("Immutable attribute.")
+
+    def insert(self, node: SingleLinkedNode[T]) -> None:
+        """
+        Inserts a node at the head of the linked list.
+
+        Parameters:
+        - node: The node to be inserted.
+
+        Returns:
+        - None
+        """
+        node.next = self.head
+        self._head = node

@@ -23,6 +23,35 @@ class TestLinkedList:
 
         assert linked_list.head is None
 
-        linked_list.head = a_node
+        with pytest.raises(AttributeError):
+            linked_list.head = a_node
+
+        assert linked_list.head is None
+
+    @pytest.mark.parametrize(
+        "data",
+        [
+            (1, 2),
+            (2, 3),
+            (3, 4),
+            ("4", "5"),
+            ("five", "six"),
+            ((6, 7), (8, 9)),
+            ([8, 9], [10, 11]),
+        ],
+    )
+    def test_insert(self, data):
+        T = type(data[0])
+
+        a_node = SingleLinkedNode[T](data[0])
+
+        linked_list = LinkedList[T](a_node)
 
         assert linked_list.head == a_node
+
+        another_node = SingleLinkedNode[T](data[1])
+
+        linked_list.insert(another_node)
+
+        assert linked_list.head == another_node
+        assert linked_list.head.next == a_node
