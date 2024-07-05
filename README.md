@@ -1,2 +1,3 @@
-# algorithms-and-data
+# Algorithms & Data (Structures)
+
 Playground for algorithms and data structures recap.
