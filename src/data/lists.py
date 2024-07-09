@@ -51,3 +51,31 @@ class LinkedList[T]:
         """
         node.next = self.head
         self._head = node
+
+    def remove(self, data: T) -> SingleLinkedNode[T] | None:
+        """
+        Removes the first occurrence of a node with the specified data from the linked list.
+
+        Parameters:
+        - data: The data to be removed.
+
+        Returns:
+        - SingleLinkedNode[T] | None: The removed node, or None if the data was not found.
+        """
+        current, previous, removed = self.head, None, None
+
+        while current is not None:
+            if current.data == data:
+                removed = current
+                try:
+                    previous.next = removed.next
+                except AttributeError:
+                    # NOTE: previous is None.
+                    self._head = removed.next
+                finally:
+                    break
+
+            previous = current
+            current = current.next
+
+        return removed

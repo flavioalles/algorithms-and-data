@@ -1,3 +1,5 @@
+from typing import Any
+
 import pytest
 
 from src.data.lists import LinkedList
@@ -55,3 +57,54 @@ class TestLinkedList:
 
         assert linked_list.head == another_node
         assert linked_list.head.next == a_node
+
+    @pytest.mark.parametrize(
+        "data, remove, expected_data",
+        [
+            ([1, 2, 3], 1, [2, 3]),
+            ([1, 2, 3], 2, [1, 3]),
+            ([1, 2, 3], 3, [1, 2]),
+        ],
+    )
+    def test_successful_removal(self, data, remove, expected_data):
+        T = type(data[0])
+
+        a_list = LinkedList[T]()
+        for item in reversed(data):
+            a_list.insert(SingleLinkedNode[T](item))
+
+        removed = a_list.remove(remove)
+
+        assert removed.data == remove
+
+        expected_list = LinkedList[T]()
+        for item in reversed(expected_data):
+            expected_list.insert(SingleLinkedNode[T](item))
+
+        assert a_list == expected_list
+
+    @pytest.mark.parametrize(
+        "data, remove, expected_data",
+        [
+            ([1, 2, 3], 4, [1, 2, 3]),
+            ([1, 2, 3], "four", [1, 2, 3]),
+            ([], 4, []),
+        ],
+    )
+    def test_unsuccessful_removal(self, data, remove, expected_data):
+        try:
+            T = type(data[0])
+        except IndexError:
+            T = Any
+
+        a_list = LinkedList[T]()
+        for item in reversed(data):
+            a_list.insert(SingleLinkedNode[T](item))
+
+        assert a_list.remove(remove) is None
+
+        expected_list = LinkedList[T]()
+        for item in reversed(expected_data):
+            expected_list.insert(SingleLinkedNode[T](item))
+
+        assert a_list == expected_list
