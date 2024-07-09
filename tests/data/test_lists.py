@@ -51,10 +51,11 @@ class TestLinkedList:
 
         assert linked_list.head == a_node
 
-        another_node = SingleLinkedNode[T](data[1])
+        another_node = SingleLinkedNode[T](data[1], _next=a_node)
 
-        linked_list.insert(another_node)
+        inserted_node = linked_list.insert(data[1])
 
+        assert inserted_node == another_node
         assert linked_list.head == another_node
         assert linked_list.head.next == a_node
 
@@ -71,7 +72,7 @@ class TestLinkedList:
 
         a_list = LinkedList[T]()
         for item in reversed(data):
-            a_list.insert(SingleLinkedNode[T](item))
+            a_list.insert(item)
 
         removed = a_list.remove(remove)
 
@@ -79,7 +80,7 @@ class TestLinkedList:
 
         expected_list = LinkedList[T]()
         for item in reversed(expected_data):
-            expected_list.insert(SingleLinkedNode[T](item))
+            expected_list.insert(item)
 
         assert a_list == expected_list
 
@@ -99,12 +100,12 @@ class TestLinkedList:
 
         a_list = LinkedList[T]()
         for item in reversed(data):
-            a_list.insert(SingleLinkedNode[T](item))
+            a_list.insert(item)
 
         assert a_list.remove(remove) is None
 
         expected_list = LinkedList[T]()
         for item in reversed(expected_data):
-            expected_list.insert(SingleLinkedNode[T](item))
+            expected_list.insert(item)
 
         assert a_list == expected_list

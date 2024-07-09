@@ -39,7 +39,7 @@ class LinkedList[T]:
         """
         raise AttributeError("Immutable attribute.")
 
-    def insert(self, node: SingleLinkedNode[T]) -> None:
+    def insert(self, data: T) -> SingleLinkedNode[T]:
         """
         Inserts a node at the head of the linked list.
 
@@ -49,8 +49,10 @@ class LinkedList[T]:
         Returns:
         - None
         """
-        node.next = self.head
+        node = SingleLinkedNode[T](_data=data, _next=self.head)
         self._head = node
+
+        return self.head
 
     def remove(self, data: T) -> SingleLinkedNode[T] | None:
         """
